@@ -1,8 +1,7 @@
-import QtQuick 2.7
-import QtQuick.Controls 1.4
-//import QtQuick.Controls 2.0
+import QtQuick 2.9
+import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
-import QtQml.Models 2.2
+import QtQml.Models 2.3
 import QtQuick.Dialogs 1.2
 
 ApplicationWindow {
@@ -55,17 +54,26 @@ ApplicationWindow {
 
                 Button {
                     text: qsTr("Сохранить изменения")
+                    onClicked: sorterModel.saveChanges()
                 }
             }
 
         }
+    }
 
-        FileDialog {
-            id: fileDialog
+    FileDialog {
+        id: fileDialog
 
-            selectFolder: true
-            folder: shortcuts.home
-            onAccepted: sorterModel.refreshModel(fileUrl)
-        }
+        selectFolder: true
+        folder: shortcuts.home
+        onAccepted: sorterModel.refreshModel(fileUrl)
+    }
+
+    MessageDialog {
+        id: notificationDialog
+
+        text: sorterModel.notificationMessage
+        onTextChanged: open()
+        onVisibleChanged: visible ? null : sorterModel.notificationMessage = ""
     }
 }

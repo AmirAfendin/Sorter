@@ -1,6 +1,7 @@
 #include <QtQml>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQuickStyle>
 #include <QDebug>
 
 #include "sortermodel.h"
@@ -11,6 +12,8 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     SorterModel sorterModel;
+
+    QQuickStyle::setStyle("Fusion");
 
     QQmlApplicationEngine engine;
 
